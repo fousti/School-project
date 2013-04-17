@@ -1,0 +1,511 @@
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	background: url('../images/bg_main.jpg') no-repeat center top;
+	font-family: arial, sans-serif;
+}
+
+/* DIVs DE STRUCTURE */
+
+div#wrapper
+{
+	margin: 0 auto;
+	width: 930px;
+}
+
+div#contentright
+{
+	width: 260px;
+	margin-bottom: 15px;
+	float: right;
+}
+
+div#contentleft
+{
+	width: 620px;
+	margin-bottom: 15px;
+	float: left;
+}
+
+/**/
+
+
+/* CLASSES GENERALES */
+
+
+div.top
+{
+	border: 2px solid #e3e3e3;
+	background: url('../images/motif.png') left top;
+	padding: 15px;
+	margin-bottom: 15px;
+}
+
+
+span.red
+{
+	color: #d32424;
+	font-weight: bold;
+}
+
+span.error
+{
+	display: block;
+	color: #d32424;
+	font-weight: bold;
+	font-size: 13px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+input.text
+{
+	border: 0;
+	font-size: 12px;
+	margin-bottom: 10px;
+	height: 20px;
+	width: 100%;
+}
+
+input.submit
+{
+	background-color: #d32424;
+	color: #fff;
+	font-weight: bold;
+	border: 0;
+	padding: 3px 0;
+	width: 100%;
+	cursor: pointer;
+}
+
+span.title
+{
+	display: block;
+	text-align: center;
+	padding: 5px 0;
+	background-color: #d32424;
+	color: #fff;
+	font-weight: bold;
+	font-size: 14px;
+	margin-bottom: 15px;
+	clear: both;
+}
+
+.first
+{
+	font-weight: bold;
+	font-size: 17px;
+	color: #d32424;
+}
+
+/**/
+
+
+/*LIENS*/
+
+a
+{
+	text-decoration: none;
+	color: #d32424;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+a:visited
+{
+	color: #d32424;
+}
+
+/**/
+
+
+
+/*HEADER*/
+
+header
+{
+	padding-top: 35px;
+	height: 200px;
+}
+
+header h1 span
+{
+	position:absolute;
+	left:-10000px;
+}
+
+header h1 a img
+{
+	border: 0px;
+}
+
+/**/
+
+
+
+/*BILLET*/
+
+h2.billet_titre
+{
+	clear: both;
+	background: #d32424 url('../images/ico_titre_billet.png') no-repeat 5px bottom;
+	padding: 10px 0 10px 60px;
+	margin-bottom: 15px;
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+}
+
+div.billet p
+{
+	font-size: 13px;
+	text-align: justify;
+	margin-bottom: 10px;
+	overflow: auto;
+}
+
+div.billet p img
+{
+	border: 2px solid #e3e3e3;
+}
+
+div.billet_infos
+{
+	font-size: 12px;
+	font-style: italic;
+	text-align: left;
+	float: right;
+	margin-bottom: 25px;
+	margin-top: 5px;
+}
+
+div.billet_infos a
+{
+	color: #d32424;
+}
+
+div.billet_infos img
+{
+	vertical-align: middle;
+}
+
+/**/
+
+
+/*COMMENTAIRES*/
+
+div.comment
+{
+	clear: both;
+	margin-bottom: 35px;
+}
+
+p.comment_content
+{
+	border:#fba9a9 1px dashed;
+	background: url('../images/opacity.png') left top;
+	clear: both;
+	padding: 15px;
+	font-size: 13px;
+}
+
+span#comment_title
+{
+	display: block;
+	clear: both;
+	font-size: 20px;
+	text-align: center;
+}
+
+div.comment_infos
+{
+	font-size: 12px;
+	font-style: italic;
+	text-align: left;
+	float: right;
+	padding: 5px;
+}
+
+div.comment_infos a
+{
+	color: #d32424;
+}
+
+
+
+div.comment_infos img
+{
+	vertical-align: middle;
+}
+
+/**/
+
+
+
+/*BLOC CONNEXION*/
+
+div#connexion
+{
+	margin-bottom: 15px;
+	font-size: 13px;
+}
+
+a.inscr_link
+{
+	display: block;
+	color: #d32424;
+	margin: 10px auto 0 auto;
+	text-align: center;
+}
+
+/**/
+
+
+/*BLOC CONNECTÉ*/
+
+a.sousmenu
+{
+	display: block;
+	background-color: #6c6c6c;
+	color: #fff;
+	font-weight: bold;
+	font-size: 13px;
+	text-align: center;
+	padding: 4px 0;
+	margin-bottom: 15px;
+}
+
+a.sousmenu:hover
+{
+	text-decoration: none;
+}
+
+span#user
+{
+	color: #d32424;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+/**/
+
+
+/* BLOC TOP COMMENTS */
+
+
+div.top ul
+{
+	list-style-type: none;
+}
+
+div.top ul li
+{
+	display: block;
+	padding: 5px;
+}
+
+div.top ul li a
+{
+	color: #000;
+}
+
+div.top ul li a.first
+{
+	color: #d32424;
+}
+
+li.bg_opacity
+{
+	background: url('../images/opacity.png') left top;
+}
+
+span.infos
+{
+	color: #000;
+	font-size: 11px;
+	font-style: italic;
+	font-weight: normal;
+}
+
+/**/
+
+
+/*BLOC TOP BLOGUEURS*/
+
+span.nb_billet
+{
+	padding-top: 3px;
+	font-style: italic;
+	font-size: 12px;
+	float: right;
+	display: block;
+}
+
+span#topmenu
+{
+	display: block;
+	text-align: center;
+	font-size: 13px;
+	margin-bottom: 10px;
+}
+
+span#topmenu a
+{
+	color: #d32424;
+}
+
+/**/
+
+
+/*INSCRIPTION*/
+
+div#inscription
+{
+	background: url('../images/bg_inscription.png') no-repeat left top;
+	padding-top: 45px;
+	min-height: 500px;
+}
+
+div#form
+{
+	background: url('../images/motif_inscription.png') left top;
+	border: 2px solid #e3e3e3;
+	padding: 15px;
+	margin: 0 auto;
+	width: 300px;
+	position: relative;
+}
+
+input.form_text
+{
+	font-size: 12px;
+	height: 20px;
+	width: 295px;
+}
+
+input.inscr_submit
+{
+	display: block;
+	background-color: #d32424;
+	color: #fff;
+	font-weight: bold;
+	border: 0;
+	padding: 3px 0;
+	width: 150px;
+	margin: 10px auto 0 auto;
+}
+
+span.form_error
+{
+	font-size: 11px;
+	font-style: italic;
+	color: #d32424;
+	display: inline-block;
+}
+
+input.correct
+{
+	font-size: 12px;
+	height: 20px;
+	width: 100%;
+	border: 1px solid green;
+}
+
+input.incorrect
+{
+	font-size: 12px;
+	height: 20px;
+	width: 100%;
+	border: 1px solid #d32424;
+}
+
+span#inscr_title
+{
+	display: block;
+	text-align: center;
+	padding: 5px 0;
+	background-color: #d32424;
+	color: #fff;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+table
+{
+	width: 100%;
+}
+
+td.form_title
+{
+	margin-top: 10px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+/**/
+
+
+/*FORMULAIRE NOUVEAU BILLET*/
+
+textarea#new_billet
+{
+	width: 100%;
+	border: 0;
+}
+
+div#contentleft form input
+{
+	margin-bottom: 15px;
+}
+
+input.post_submit
+{
+	display: block;
+	background-color: #d32424;
+	color: #fff;
+	font-weight: bold;
+	border: 0;
+	padding: 3px 0;
+	width: 150px;
+	margin: 10px 0 15px 15px;
+	float: right;
+}
+
+/**/
+
+
+/*PAGINATION*/
+
+div#pagination
+{
+	clear: both;
+	text-align: center;
+}
+
+/**/
+
+
+/*FOOTER*/
+
+footer
+{
+	text-align: center;
+	clear: both;
+	background-color: #d0d0d0;
+	padding: 10px 0;
+}
+
+footer span
+{
+	font-size: 12px;
+}
+
+/**/
