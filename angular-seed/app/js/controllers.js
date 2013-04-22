@@ -3,9 +3,6 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['myApp.services']).
-  controller('MyCtrl1', [function($scope,Facebook) {
-  		
-  }])
-  .controller('MyCtrl2', [function() {
-
-  }]);
+  controller('MainCtrl', ['$scope', 'FBUser',function($scope, FBUser) {
+  	$scope.user = FBUser;
+}]);
