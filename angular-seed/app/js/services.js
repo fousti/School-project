@@ -29,7 +29,7 @@ angular.module('myApp.services', []).service('facebook', ['$rootScope', '$window
 
 }]);
 
-angular.module('myApp.services',['myApp.services.facebook']).service('FBUser', ['$log', '$rootScope', 'facebook', function ($log, $rootScope, facebook) {
+angular.module('myApp.services',[]).service('FBUser', ['$log', '$rootScope', 'facebook', function ($log, $rootScope, facebook) {
   var that = this;
 
   this.authorized = false;
