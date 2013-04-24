@@ -5,15 +5,18 @@
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-angular.module('myApp.services', []).service('facebook', ['$rootScope', '$window', function ($rootScope, $window) {
+angular.module('myApp.services', []).service('facebook', function ($rootScope, $window) {
 
   this.askFacebookForAuthentication = function (fail, success) {
     FB.login(function (response) {
       $rootScope.$apply(function () {
         if (response.authResponse) {
-          FB.api('/me', success);
+      		FB.api('/me?fields=id,name,friends', function(response){
+
+            this.access_token = response.access_token;
+         });
         } else {
-          fail('User cancelled login or did not fully authorize.');
+          console.log('User cancelled login or did not fully authorize.');
         }
       });
     });
@@ -27,15 +30,13 @@ angular.module('myApp.services', []).service('facebook', ['$rootScope', '$window
 
   this.FB = $window.FB;
 
-}]);
-
-angular.module('myApp.services',[]).service('FBUser', ['$log', '$rootScope', 'facebook', function ($log, $rootScope, facebook) {
+}).service('FBUser',function ($log, $rootScope, facebook) {
   var that = this;
 
   this.authorized = false;
-
-  facebook.FB.Event.subscribe('auth.authResponseChange', function (response) {
-    $log.info("Event: auth.authResponseChange");
+  this.name = "";
+  facebook.FB.Event.subscribe('auth.login', function (response) {
+    // $log.info("Event: auth.authResponseChange");
     if (response.authResponse) {
       if (response.status === 'connected') {
         // User logged in and authorized
@@ -43,7 +44,17 @@ angular.module('myApp.services',[]).service('FBUser', ['$log', '$rootScope', 'fa
         $rootScope.$apply(function () {
           that.authorized = true;
         });
-        // DO WORK
+        $rootScope.$eval(function(){
+          
+            facebook.FB.api('/me?fields=id,name,friends', function(response){
+            that.name = response.name;
+            that.friends = response.friends;
+            console.log('toto');
+         });
+
+        });
+
+
       } else if (response.status === 'not_authorized') {
         // User logged in but has not authorized app
         $log.info('User logged in');
@@ -65,13 +76,39 @@ angular.module('myApp.services',[]).service('FBUser', ['$log', '$rootScope', 'fa
     }
   });
 
+  // this.loadFriends = function()
+  //   {    
+  //     console.log(facebook.accessToken);
+
+  //     FB.api("/"+facebook.uid+"/friends?fields=name,picture.type(square)", function(response)
+  //         {
+  //          $rootScope.$apply(function(){
+
+  //           if (response) {
+
+  //             that.friends = response;
+              
+  //           }
+  //           else
+  //           {
+  //             that.friends = {error: "FRIENDS_FAIL", message: "Facebook friends error: " + response};
+  //           }
+  //         });
+  //     });
+  //   };
+
   this.login = function (success, fail) {
     facebook.FB.login(function (response) {
       $rootScope.$apply(function () {
         if (response.authResponse) {
-          success(response);
+         //  facebook.FB.api('/me?fields=id,name,friends', function(response){
+         //    that.name = response.name;
+         //    that.friends = response.friends;
+         // });
+          $log.info('Login success');
+          that.authorized = true ;
         } else {
-          fail('Login unsuccessful');
+          console.log('Login unsuccessful');
         }
       });
     });
@@ -84,4 +121,5 @@ angular.module('myApp.services',[]).service('FBUser', ['$log', '$rootScope', 'fa
       });
     });
   };
-}]);
+  
+});
