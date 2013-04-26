@@ -1,22 +1,16 @@
 'use strict';
 
 /* Controllers */
-
+window.customApply = function (scope, cb) {
+if (!scope.$$phase)
+scope.$apply(cb);
+else
+cb();
+}
 
 
 function ConnectCtrl($scope,FBUser) {
 
-
-	$scope.safeApply = function(fn) {
-	  var phase = this.$root.$$phase;
-	  if(phase == '$apply' || phase == '$digest') {
-	    if(fn && (typeof(fn) === 'function')) {
-	      fn();
-	    }
-	  } else {
-	    this.$apply(fn);
-	  }
-};
 	$scope.user = {};
     $scope.user.authorized = false;
   //   $scope.load_friend = function () {
@@ -27,12 +21,16 @@ function ConnectCtrl($scope,FBUser) {
 
   //   };
 
+           
     $scope.fb_login = function() {
   
     			FBUser.login(function(){
-            $scope.safeApply(function(){
+            window.customApply($scope,function(){
               $scope.user.authorized = true;
-              $scope.user.friends = FBUser.get_friends();
+              FBUser.get_friends(function(response){
+                $scope.user.friends = response;
+               });
+
             });
 
           },function(){
@@ -43,7 +41,7 @@ function ConnectCtrl($scope,FBUser) {
 
     $scope.fb_logout = function()  {
     		FBUser.logout(function(){
-          $scope.safeApply(function(){
+          window.customApply($scope,function(){
             $scope.user.authorized = false;
           });
         });

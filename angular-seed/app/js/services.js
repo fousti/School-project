@@ -102,14 +102,14 @@ angular.module('myApp.services', []).service('facebook', function ($window) {
   //     });
   //   };
 
-  this.get_friends = function() {
+  this.get_friends = function(success) {
     FB.api('/me?fields=id,name,friends', function(response){
               console.log(response);
-        return response;
+        success(response);
 
     });
  };
- 
+
   this.login = function (success, fail) {
     facebook.FB.login(function (response) {
 
