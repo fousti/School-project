@@ -28,59 +28,58 @@ angular.module('myApp.services', []).service('facebook', function ($window) {
   //   });
   // };
 
-  // this.getLoginStatus = function () {
-  //   FB.getLoginStatus(function (response) {
-  //     return response;
-  //   });
-  // };
+  this.getLoginStatus = function () {
+    FB.getLoginStatus(function (response) {
+      return response;
+    });
+  };
 
   this.FB = $window.FB;
 
 }).service('FBUser',function ($log,facebook) {
   var that = this;
 
-  this.authorized = false;
-  this.name = "";
-  // facebook.FB.Event.subscribe('auth.login', function (response) {
-  //   // $log.info("Event: auth.authResponseChange");
-  //   if (response.authResponse) {
-  //     if (response.status === 'connected') {
-  //       // User logged in and authorized
-  //       $log.info('User logged in and authorized');
-  //       $rootScope.$apply(function () {
-  //         that.authorized = true;
-  //       });
+
+  facebook.FB.Event.subscribe('auth.authResponseChange', function (response) {
+    // $log.info("Event: auth.authResponseChange");
+    if (response.authResponse) {
+      if (response.status === 'connected') {
+        // User logged in and authorized
+        $log.info('User logged in and authorized');
+    
+          that.authorized = true;
+   
 
 
-  //       //     facebook.FB.api('/me?fields=id,name,friends', function(response){
-  //       //     that.name = response.name;
-  //       //     that.friends = response.friends;
-  //       //     console.log('toto');
+        //     facebook.FB.api('/me?fields=id,name,friends', function(response){
+        //     that.name = response.name;
+        //     that.friends = response.friends;
+        //     console.log('toto');
 
 
-  //       // });
+        // });
 
 
-  //     } else if (response.status === 'not_authorized') {
-  //       // User logged in but has not authorized app
-  //       $log.info('User logged in');
-  //       $rootScope.$apply(function () {
-  //         that.authorized = false;
-  //       });
-  //     } else {
-  //       // User logged out
-  //       $log.info('User logged out');
-  //       $rootScope.$apply(function () {
-  //         that.authorized = false;
-  //       });
-  //     }
-  //   } else {
-  //     $log.info('No valid authResponse found, user logged out');
-  //     $rootScope.$apply(function () {
-  //       that.authorized = false;
-  //     });
-  //   }
-  // });
+      } else if (response.status === 'not_authorized') {
+        // User logged in but has not authorized app
+        $log.info('User logged in');
+      
+          that.authorized = false;
+
+      } else {
+        // User logged out
+        $log.info('User logged out');
+       
+          that.authorized = false;
+   
+      }
+    } else {
+      $log.info('No valid authResponse found, user logged out');
+      
+        that.authorized = false;
+    
+    }
+  });
 
   // this.loadFriends = function()
   //   {    
@@ -103,21 +102,28 @@ angular.module('myApp.services', []).service('facebook', function ($window) {
   //     });
   //   };
 
+  this.get_friends = function() {
+    FB.api('/me?fields=id,name,friends', function(response){
+              console.log(response);
+        return response;
+
+    });
+ };
+ 
   this.login = function (success, fail) {
     facebook.FB.login(function (response) {
+
         if (response.authResponse) {
-            that.authorized = false;
-            success(response);
+          success(response);
         } else {
           fail('Login unsuccessful');
         }
     });
   };
 
-  this.logout = function () {
+  this.logout = function (cb) {
     facebook.FB.logout(function () {
-
-        that.authorized = false;
+        cb();
     });
   };
   

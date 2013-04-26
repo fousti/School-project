@@ -2,35 +2,54 @@
 
 /* Controllers */
 
-// angular.module('myApp.controllers', ['myApp.services']).
-//   controller('MainCtrl', ['$scope', 'FBUser',function($scope, FBUser) {
-//   	$scope.user = FBUser;
-// }]);
+
 
 function ConnectCtrl($scope,FBUser) {
 
-    $scope.user = FBUser;
-    $scope.load_friend = function () {
-    $scope.$apply(function(){
-    		$scope.user.FB.api('/me?fields=id,name,friends', function(response){
-	            $scope.user.name = response.name;
-	            $scope.user.friends = response.friends;
-       		 });
 
-		});
+	$scope.safeApply = function(fn) {
+	  var phase = this.$root.$$phase;
+	  if(phase == '$apply' || phase == '$digest') {
+	    if(fn && (typeof(fn) === 'function')) {
+	      fn();
+	    }
+	  } else {
+	    this.$apply(fn);
+	  }
+};
+	$scope.user = {};
+    $scope.user.authorized = false;
+  //   $scope.load_friend = function () {
+  //   $scope.$apply(function(){
+  //  		$scope.user.get_friends();
 
+		// });
+
+  //   };
+
+    $scope.fb_login = function() {
+  
+    			FBUser.login(function(){
+            $scope.safeApply(function(){
+              $scope.user.authorized = true;
+              $scope.user.friends = FBUser.get_friends();
+            });
+
+          },function(){
+              $scope.user.authorized = false;
+          });
+
+    	};
+
+    $scope.fb_logout = function()  {
+    		FBUser.logout(function(){
+          $scope.safeApply(function(){
+            $scope.user.authorized = false;
+          });
+        });
     };
 
-    $scope.fb_login = function(FBuser) {
-    	$scope.FBuser.login($scope.load_friend);
-
-
-    };
-    $scope.fb_logout = function(FBuser)  {
-    	$scope.FBuser.logout();
-    };
-
-
+console.log($scope.user.friends);
 }
 
 ConnectCtrl.$inject = ['$scope', 'FBUser'];
