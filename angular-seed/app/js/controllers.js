@@ -12,7 +12,7 @@ cb();
 function ConnectCtrl($scope,FBUser) {
 
 	$scope.user = {};
-    $scope.user.authorized = false;
+  $scope.user.authorized = false;
   //   $scope.load_friend = function () {
   //   $scope.$apply(function(){
   //  		$scope.user.get_friends();
@@ -20,7 +20,14 @@ function ConnectCtrl($scope,FBUser) {
 		// });
 
   //   };
-
+    $scope.paging = function(query) {
+        FBUser.next_friends(query,function(response) {
+          window.customApply($scope,function() {
+             $scope.user.friends = response;
+             console.log(response);
+          });
+        });
+    };
            
     $scope.fb_login = function() {
   
@@ -53,4 +60,22 @@ function ConnectCtrl($scope,FBUser) {
 console.log($scope.user.friends);
 }
 
-ConnectCtrl.$inject = ['$scope', 'FBUser'];
+function friendsCtrl($scope,$routeParams,FBUser) {
+
+  $scope.friend = {};
+  $scope.load_info = function() {
+    FBUser.get_info($routeParams.friendId,function(response){
+      window.customApply($scope,function(){
+        console.log(response);
+        $scope.friend = response;
+      });
+  
+    });
+  };
+
+  $scope.load_info();
+
+}
+
+
+ConnectCtrl.$inject = ['$scope', 'FBUser','$routeParams'];

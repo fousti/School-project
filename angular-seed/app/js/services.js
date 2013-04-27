@@ -109,6 +109,17 @@ angular.module('myApp.services', []).service('facebook', function ($window) {
 
     });
  };
+ this.next_friends = function(query,success) {
+    FB.api(query,function(response) {
+        success(response);
+    });
+
+ };
+this.get_info = function(id,success) {
+  FB.api('/'+id,function(response) {
+    success(response);
+  });
+};
 
   this.login = function (success, fail) {
     facebook.FB.login(function (response) {
