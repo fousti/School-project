@@ -28,7 +28,10 @@ function ConnectCtrl($scope,FBUser) {
             window.customApply($scope,function(){
               $scope.user.authorized = true;
               FBUser.get_friends(function(response){
-                $scope.user.friends = response;
+                window.customApply($scope,function(){
+                  $scope.user.friends = response;
+                });
+               
                });
 
             });
