@@ -25,6 +25,5 @@ run_list(
     "recipe[php]",
     "recipe[php::module_mysql]",
     "recipe[apache2::vhosts]",
-    "recipe[database::mysql]",
-    "recipe[database::import]"
+    "recipe[database::mysql]"
 )

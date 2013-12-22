@@ -6,8 +6,8 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
   config.vm.define :neo01 do |neo|
     neo.vm.network :hostonly, "192.168.33.33"
-    neo.vm.base_mac = "60672018648d"
-#    neo.vm.share_folder "www", "/var/www", owner: "vagrant", group: "www-data"
+    #neo.vm.base_mac = "60672018648d"
+    neo.vm.share_folder "website", "/var/www", "./www", owner: "vagrant", group: "www-data"
     neo.vm.host_name = "www.example.me"
   end
 
